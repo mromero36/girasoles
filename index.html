@@ -1,40 +1,66 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Animación Flores Amarillas</title>
-    <style>
-        @keyframes flowerAnimation {
-            0% {
-                transform: translate(-50%) scale(1);
-            }
-            50% {
-                transform: translate(-50%) scale(1.2);
-            }
-            100% {
-                transform: translate(-50%) scale(1);
-            }
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🌻¿Quién la marchitará?🌻</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #fffbe7;
+    }
 
-        .Flores_Amarillas {
-            position: absolute;
-            font-family: "Disfrútalo", sans-serif;
-            top: 20px;
-            left: 50%;
-            transform: translate(-50%);
-            --petal-gradient: #ff8c00;
-            --petal-grad-mid: #ffd700;
-            --petal-grad-end: #ffff00;
-            font-size: 50px;
-            color: #ff8c00;
-            animation: flowerAnimation 2s ease-in-out infinite;
-        }
-    </style>
+    .flor {
+      position: relative;
+      width: 100px;
+      height: 100px;
+    }
+
+    .petalo {
+      position: absolute;
+      width: 60px;
+      height: 90px;
+      background: radial-gradient(circle at center, #ffd700, #ff8c00);
+      border-radius: 50% 50% 50% 50%;
+      top: 5px;
+      left: 20px;
+      transform-origin: bottom center;
+      animation: latir 2s infinite;
+    }
+
+    .petalo:nth-child(2) { transform: rotate(72deg) translateY(-20px); }
+    .petalo:nth-child(3) { transform: rotate(144deg) translateY(-20px); }
+    .petalo:nth-child(4) { transform: rotate(216deg) translateY(-20px); }
+    .petalo:nth-child(5) { transform: rotate(288deg) translateY(-20px); }
+
+    .centro {
+      position: absolute;
+      top: 35px;
+      left: 35px;
+      width: 30px;
+      height: 30px;
+      background: #ffeb3b;
+      border-radius: 50%;
+      z-index: 10;
+    }
+
+    @keyframes latir {
+      0%, 100% { transform: scale(1) rotate(var(--angle, 0)); }
+      50% { transform: scale(1.1) rotate(var(--angle, 0)); }
+    }
+  </style>
 </head>
 <body>
-    <div class="Flores_Amarillas">
-        🌸
-    </div>
+  <div class="flor">
+    <div class="petalo" style="--angle: 0deg;"></div>
+    <div class="petalo" style="--angle: 72deg;"></div>
+    <div class="petalo" style="--angle: 144deg;"></div>
+    <div class="petalo" style="--angle: 216deg;"></div>
+    <div class="petalo" style="--angle: 288deg;"></div>
+    <div class="centro"></div>
+  </div>
 </body>
 </html>
