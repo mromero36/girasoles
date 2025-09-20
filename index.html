@@ -1,25 +1,40 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🌻¿Quién la marchitará?🌻</title>
-  <style>
-    .Flores_Amarillas {
-      position: absolute;
-      font-family: "Disfrútalo", sans-serif;
-      top: 20px;
-      left: 50%;
-      transform: translate(-50%);
-      --petal-gradient: #ff8c00;
-      --petal-grad-mid: #ffd700;
-      --petal-grad-end: #ffff00; 
-      font-size: 24px;
-      color: var(--petal-grad-mid);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animación Flores Amarillas</title>
+    <style>
+        @keyframes flowerAnimation {
+            0% {
+                transform: translate(-50%) scale(1);
+            }
+            50% {
+                transform: translate(-50%) scale(1.2);
+            }
+            100% {
+                transform: translate(-50%) scale(1);
+            }
+        }
+
+        .Flores_Amarillas {
+            position: absolute;
+            font-family: "Disfrútalo", sans-serif;
+            top: 20px;
+            left: 50%;
+            transform: translate(-50%);
+            --petal-gradient: #ff8c00;
+            --petal-grad-mid: #ffd700;
+            --petal-grad-end: #ffff00;
+            font-size: 50px;
+            color: #ff8c00;
+            animation: flowerAnimation 2s ease-in-out infinite;
+        }
+    </style>
 </head>
 <body>
-  <div class="Flores_Amarillas">💛 Flores Amarillas 💛</div>
+    <div class="Flores_Amarillas">
+        🌸
+    </div>
 </body>
 </html>
