@@ -1,0 +1,9 @@
+:Flores_Amarillas {
+    position: absolute;
+    font-family: "Disfrútalo";
+    top: 20px;
+    transform: translate(-50%);
+    --petal-gradient: #ff8c00;
+    --petal-grad-mid: #ffd700;
+    --petal-grad-end: #ffff00; 
+}
