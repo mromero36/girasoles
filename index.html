@@ -1,39 +1,209 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🌻¿Quién la marchitará?🌻</title>
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(#87ceeb, #fffde7);
-      overflow: hidden;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Quién lo marchitará?</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1e1e2d, #2d2d4d);
+            overflow: hidden;
+            margin: 0;
+            position: relative;
+            font-family: 'Arial', sans-serif;
+            color: #fff;
+        }
 
-    svg {
-      width: 500px;
-      height: 500px;
-    }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+            padding: 20px;
+        }
 
-    .girasol {
-      transform-origin: bottom center;
-      transform: scale(0);
-      opacity: 0;
-      animation: florecer 2s forwards;
-      animation-delay: 0.5s;
-    }
+        .message {
+            font-size: 2.5em;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
 
-    @keyframes florecer {
-      to { transform: scale(1); opacity: 1; }
-    }
+        .sunflower-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+        }
 
-    .tallo {
-      stroke: #2e7d32;
+        .stem {
+            width: 15px;
+            height: 200px;
+            background: linear-gradient(to top, #6b8e23, #556b2f);
+            border-radius: 10px;
+            position: absolute;
+            bottom: 0;
+            z-index: 1;
+        }
+
+        .leaf {
+            width: 60px;
+            height: 120px;
+            background: linear-gradient(to right, #6b8e23, #556b2f);
+            border-radius: 50%;
+            position: absolute;
+            z-index: 1;
+        }
+
+        .leaf.left {
+            transform: rotate(-30deg);
+            left: 20px;
+            bottom: 80px;
+        }
+
+        .leaf.right {
+            transform: rotate(30deg);
+            right: 20px;
+            bottom: 80px;
+        }
+
+        .head {
+            position: absolute;
+            bottom: 180px;
+            z-index: 2;
+        }
+
+        .center {
+            width: 80px;
+            height: 80px;
+            background-color: #5d4037;
+            border-radius: 50%;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 3;
+            animation: pulse 2s infinite ease-in-out;
+        }
+
+        .petal {
+            position: absolute;
+            width: 30px;
+            height: 80px;
+            background: linear-gradient(to top, #ffd700, #ffc107);
+            border-radius: 50% 50% 0 0;
+            transform-origin: bottom center;
+            z-index: 2;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            animation: sway 5s infinite ease-in-out;
+        }
+
+        .petal-group {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            animation: rotate-petals 20s infinite linear;
+        }
+
+        /* Estrellas de fondo */
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            background-color: #fff;
+            border-radius: 50%;
+            position: absolute;
+            animation: twinkle 5s infinite ease-in-out;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes sway {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        @keyframes rotate-petals {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="stars"></div>
+
+    <div class="container">
+        <div class="message">
+            Para Ti
+        </div>
+        <div class="sunflower-container">
+            <div class="stem"></div>
+            <div class="leaf left"></div>
+            <div class="leaf right"></div>
+            <div class="head">
+                <div class="center"></div>
+                <!-- Petals will be generated by JavaScript -->
+                <div class="petal-group"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const petalGroup = document.querySelector('.petal-group');
+            const numPetals = 24;
+
+            for (let i = 0; i < numPetals; i++) {
+                const petal = document.createElement('div');
+                petal.classList.add('petal');
+                const rotation = (360 / numPetals) * i;
+                petal.style.transform = `rotate(${rotation}deg)`;
+                petalGroup.appendChild(petal);
+            }
+
+            // Generar estrellas aleatorias
+            const starsContainer = document.querySelector('.stars');
+            const numStars = 100;
+
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                const size = Math.random() * 3;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.animationDelay = `${Math.random() * 5}s`;
+                starsContainer.appendChild(star);
+            }
+        });
+    </script>
+
+</body>
+</html>
+
       stroke-width: 12;
       fill: none;
       stroke-dasharray: 300;
@@ -161,3 +331,4 @@
   </svg>
 </body>
 </html>
+
