@@ -3,20 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🌻¿Quién la marchitará?🌻</title>
+  <title>Girasoles</title>
   <style>
     body {
+      margin: 0;
+      height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      background: #fffbe7;
+      background: #c8f7c5;
+      overflow: hidden;
     }
 
-    .flor {
+    .girasol {
       position: relative;
-      width: 100px;
-      height: 100px;
+      width: 120px;
+      height: 120px;
+      animation: crecer 3s ease-in-out infinite alternate;
     }
 
     .petalo {
@@ -25,42 +28,66 @@
       height: 90px;
       background: radial-gradient(circle at center, #ffd700, #ff8c00);
       border-radius: 50% 50% 50% 50%;
-      top: 5px;
-      left: 20px;
+      top: 15px;
+      left: 30px;
       transform-origin: bottom center;
-      animation: latir 2s infinite;
     }
 
-    .petalo:nth-child(2) { transform: rotate(72deg) translateY(-20px); }
-    .petalo:nth-child(3) { transform: rotate(144deg) translateY(-20px); }
-    .petalo:nth-child(4) { transform: rotate(216deg) translateY(-20px); }
-    .petalo:nth-child(5) { transform: rotate(288deg) translateY(-20px); }
+    .petalo:nth-child(1) { transform: rotate(0deg)   translateY(-40px); }
+    .petalo:nth-child(2) { transform: rotate(30deg)  translateY(-40px); }
+    .petalo:nth-child(3) { transform: rotate(60deg)  translateY(-40px); }
+    .petalo:nth-child(4) { transform: rotate(90deg)  translateY(-40px); }
+    .petalo:nth-child(5) { transform: rotate(120deg) translateY(-40px); }
+    .petalo:nth-child(6) { transform: rotate(150deg) translateY(-40px); }
+    .petalo:nth-child(7) { transform: rotate(180deg) translateY(-40px); }
+    .petalo:nth-child(8) { transform: rotate(210deg) translateY(-40px); }
+    .petalo:nth-child(9) { transform: rotate(240deg) translateY(-40px); }
+    .petalo:nth-child(10){ transform: rotate(270deg) translateY(-40px); }
+    .petalo:nth-child(11){ transform: rotate(300deg) translateY(-40px); }
+    .petalo:nth-child(12){ transform: rotate(330deg) translateY(-40px); }
 
     .centro {
       position: absolute;
-      top: 35px;
-      left: 35px;
-      width: 30px;
-      height: 30px;
-      background: #ffeb3b;
+      top: 40px;
+      left: 40px;
+      width: 40px;
+      height: 40px;
+      background: radial-gradient(circle at center, #3e2723, #1b0000);
       border-radius: 50%;
       z-index: 10;
     }
 
-    @keyframes latir {
-      0%, 100% { transform: scale(1) rotate(var(--angle, 0)); }
-      50% { transform: scale(1.1) rotate(var(--angle, 0)); }
+    .tallo {
+      position: absolute;
+      top: 120px;
+      left: 55px;
+      width: 10px;
+      height: 200px;
+      background: #388e3c;
+    }
+
+    @keyframes crecer {
+      0%   { transform: scale(0.8) rotate(0deg); }
+      100% { transform: scale(1.2) rotate(10deg); }
     }
   </style>
 </head>
 <body>
-  <div class="flor">
-    <div class="petalo" style="--angle: 0deg;"></div>
-    <div class="petalo" style="--angle: 72deg;"></div>
-    <div class="petalo" style="--angle: 144deg;"></div>
-    <div class="petalo" style="--angle: 216deg;"></div>
-    <div class="petalo" style="--angle: 288deg;"></div>
+  <div class="girasol">
+    <div class="petalo"></div>
+    <div class="petalo"></div>
+    <div class="petalo"></div>
+    <div class="petalo"></div>
+    <div class="petalo"></div>
+    <div class="petalo"></div>
+    <div class="petalo"></div>
+    <div class="petalo"></div>
+    <div class="petalo"></div>
+    <div class="petalo"></div>
+    <div class="petalo"></div>
+    <div class="petalo"></div>
     <div class="centro"></div>
+    <div class="tallo"></div>
   </div>
 </body>
 </html>
