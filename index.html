@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>¿Quién lo marchitará?</title>
+    <title>🌻¿Quién lo marchitará?🌻</title>
     <style>
         body {
             display: flex;
@@ -34,6 +34,181 @@
             margin-bottom: 20px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
+
+        .svg-container {
+            width: 300px;
+            height: 400px;
+            position: relative;
+        }
+
+        /* Animaciones */
+        .stem-path {
+            animation: grow-stem 2s forwards;
+            stroke-dasharray: 300;
+            stroke-dashoffset: 300;
+        }
+
+        .leaf-path {
+            opacity: 0;
+            animation: fade-in 1s forwards;
+        }
+
+        .left-leaf {
+            animation-delay: 2s;
+        }
+
+        .right-leaf {
+            animation-delay: 2.2s;
+        }
+
+        .petal {
+            opacity: 0;
+            transform-origin: 50% 100%;
+            animation: fade-in 0.5s forwards, sway-petal 5s infinite ease-in-out;
+        }
+
+        .petal.p1 { animation-delay: 2.5s; }
+        .petal.p2 { animation-delay: 2.6s; }
+        .petal.p3 { animation-delay: 2.7s; }
+        .petal.p4 { animation-delay: 2.8s; }
+        .petal.p5 { animation-delay: 2.9s; }
+        .petal.p6 { animation-delay: 3s; }
+        .petal.p7 { animation-delay: 3.1s; }
+        .petal.p8 { animation-delay: 3.2s; }
+        .petal.p9 { animation-delay: 3.3s; }
+        .petal.p10 { animation-delay: 3.4s; }
+        .petal.p11 { animation-delay: 3.5s; }
+        .petal.p12 { animation-delay: 3.6s; }
+
+        .center {
+            opacity: 0;
+            animation: fade-in 1s forwards, pulse 2s infinite ease-in-out;
+            animation-delay: 3s;
+        }
+
+        @keyframes grow-stem {
+            to { stroke-dashoffset: 0; }
+        }
+
+        @keyframes fade-in {
+            to { opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes sway-petal {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        /* Estrellas de fondo */
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            background-color: #fff;
+            border-radius: 50%;
+            position: absolute;
+            animation: twinkle 5s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="stars"></div>
+
+    <div class="container">
+        <div class="message">
+            Para Ti
+        </div>
+        <div class="svg-container">
+            <svg width="100%" height="100%" viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="gradStem" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#6b8e23" />
+                        <stop offset="100%" style="stop-color:#556b2f" />
+                    </linearGradient>
+                    <linearGradient id="gradLeaf" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#6b8e23" />
+                        <stop offset="100%" style="stop-color:#556b2f" />
+                    </linearGradient>
+                    <linearGradient id="gradPetal" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#ffd700" />
+                        <stop offset="100%" style="stop-color:#ffc107" />
+                    </linearGradient>
+                    <radialGradient id="gradCenter" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                        <stop offset="0%" style="stop-color:#5d4037" />
+                        <stop offset="100%" style="stop-color:#4e342e" />
+                    </radialGradient>
+                </defs>
+
+                <!-- Tallo -->
+                <path class="stem-path" d="M150 400 L150 150" stroke="url(#gradStem)" stroke-width="15" stroke-linecap="round" fill="none" />
+
+                <!-- Hojas -->
+                <path class="leaf-path left-leaf" d="M150 250 Q 80 200 100 180 T 150 250" fill="url(#gradLeaf)" />
+                <path class="leaf-path right-leaf" d="M150 250 Q 220 200 200 180 T 150 250" fill="url(#gradLeaf)" />
+
+                <!-- Pétalos (generados por JS para rotación) -->
+                <g class="petal-group"></g>
+
+                <!-- Centro -->
+                <circle class="center" cx="150" cy="150" r="40" fill="url(#gradCenter)" />
+
+            </svg>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const petalGroup = document.querySelector('.petal-group');
+            const numPetals = 12;
+
+            for (let i = 0; i < numPetals; i++) {
+                const rotation = (360 / numPetals) * i;
+                const path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
+                path.setAttribute('class', `petal p${i + 1}`);
+                path.setAttribute('fill', 'url(#gradPetal)');
+                path.setAttribute('d', 'M150 150 L150 110 Q150 70 180 80 Q150 100 150 150 Z');
+                path.setAttribute('transform', `rotate(${rotation}, 150, 150)`);
+                petalGroup.appendChild(path);
+            }
+
+            // Generar estrellas aleatorias
+            const starsContainer = document.querySelector('.stars');
+            const numStars = 100;
+
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                const size = Math.random() * 3;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.animationDelay = `${Math.random() * 5}s`;
+                starsContainer.appendChild(star);
+            }
+        });
+    </script>
+</body>
+</html>
+
 
         .sunflower-container {
             position: relative;
@@ -331,4 +506,5 @@
   </svg>
 </body>
 </html>
+
 
